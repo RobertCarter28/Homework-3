@@ -1,4 +1,5 @@
-* General page styling */
+
+/* General styling */
 * {
     box-sizing: border-box;
 }
@@ -20,11 +21,11 @@ header {
     background-color: #101d35;
     color: white;
     text-align: center;
-    padding: 60px 20px;
+    padding: 50px 20px;
 }
 
 header h1 {
-    font-size: 42px;
+    font-size: clamp(28px, 4vw, 42px);
     margin: 0 0 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -32,15 +33,15 @@ header h1 {
 
 header p {
     max-width: 650px;
-    margin: 0 auto;
+    margin: auto;
     color: #d7deeb;
     font-size: 18px;
 }
 
-/* Navigation bar */
+/* Navigation */
 nav {
     background-color: #c62828;
-    padding: 12px 20px;
+    padding: 15px 20px;
 }
 
 nav ul {
@@ -48,7 +49,7 @@ nav ul {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 30px;
     padding: 0;
     margin: 0;
 }
@@ -63,36 +64,48 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Main content */
+/* Main Grid Layout */
 main {
-    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 1200px;
     margin: 35px auto;
     padding: 0 20px;
+    min-width: 0;
 }
 
 /* Sections */
 section {
     background-color: white;
-    margin-bottom: 30px;
-    padding: 30px;
+    margin: 0;
+    padding: 25px;
     border-radius: 10px;
     border-left: 5px solid #c62828;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    min-width: 0;
+    overflow-wrap: anywhere;
     scroll-margin-top: 20px;
+}
+
+/* First section takes full width */
+#what-is-nil {
+    grid-column: 1 / -1;
 }
 
 section h2 {
     color: #101d35;
     margin-top: 0;
-    font-size: 28px;
+    font-size: 26px;
 }
 
 /* Articles */
 article {
     background-color: #f5f7fb;
-    padding: 18px 22px;
+    padding: 18px;
     margin-top: 20px;
     border-radius: 8px;
+    min-width: 0;
 }
 
 article h3 {
@@ -119,6 +132,7 @@ figure {
 figure img {
     display: block;
     width: 100%;
+    max-width: 100%;
     max-height: 400px;
     object-fit: cover;
     border-radius: 8px;
@@ -139,18 +153,32 @@ footer {
     padding: 25px 20px;
 }
 
-footer p {
-    margin: 0;
-}
-
-/* Mobile-friendly design */
-@media (max-width: 600px) {
-    header {
-        padding: 40px 15px;
+/* Tablet: 768px */
+@media screen and (max-width: 900px) {
+    main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    header h1 {
-        font-size: 30px;
+    #what-is-nil {
+        grid-column: 1 / -1;
+    }
+
+    header {
+        padding: 40px 20px;
+    }
+}
+
+/* Mobile: 600px and below */
+@media screen and (max-width: 600px) {
+    main {
+        grid-template-columns: 1fr;
+        padding: 0 12px;
+        margin: 20px auto;
+        gap: 18px;
+    }
+
+    #what-is-nil {
+        grid-column: auto;
     }
 
     nav ul {
@@ -159,9 +187,8 @@ footer p {
         gap: 8px;
     }
 
-    main {
-        margin: 20px auto;
-        padding: 0 12px;
+    header {
+        padding: 35px 15px;
     }
 
     section {
@@ -169,6 +196,10 @@ footer p {
     }
 
     section h2 {
-        font-size: 24px;
+        font-size: 23px;
+    }
+
+    article {
+        padding: 15px;
     }
 }
